@@ -1,0 +1,22 @@
+#!/bin/bash
+set -x
+
+wkd="$(pwd)"
+fp="$(
+  cd "$(dirname "$0")" || exit
+  pwd -P
+)"
+
+cd "$fp"
+DP="$fp/consul.d"
+CP="$fp/config.json"
+
+[ ! -d "$DP" ] && mkdir "$DP"
+host_name="`hostname`"
+host_ip=`hostname -I | awk '{print $1}'`
+
+sed -ie "s/\"retry_join\".*/\"retry_join\": \[\"${host_ip}\"\],/" "$CP"
+
+[ ! -e consul ] && tar -xzf consul.tar.gz
+# ./consul agent -config-dir="$CP" -bind=$host_ip
+nohup ./consul agent -config-dir="$CP" -bind=$host_ip &
