@@ -7,5 +7,5 @@ fp="$(
   pwd -P
 )"
 
-cd "$cp"
-./sbin/nginx -p "$cp"
+cd "$fp"
+./sbin/nginx -p "$fp" $@

@@ -1,0 +1,11 @@
+#!/bin/bash
+set -x
+
+wkd="$(pwd)"
+fp="$(
+  cd "$(dirname "$0")" || exit
+  pwd -P
+)"
+
+cd "$fp"
+./sbin/nginx -p "$fp" $@
