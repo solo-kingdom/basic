@@ -1,0 +1,22 @@
+#!/bin/sh
+./configure --prefix="`pwd`/build" \
+    --with-pcre \
+    --with-stream \
+    --with-http_v2_module \
+    --with-http_realip_module \
+    --with-http_gzip_static_module \
+    --with-http_addition_module \
+    --with-http_ssl_module \
+    --with-http_sub_module \
+    --without-mail_smtp_module \
+    --without-mail_imap_module \
+    --without-mail_pop3_module \
+    --http-log-path=/logs/nginx/access.log \
+    --error-log-path=/logs/nginx/error.log \
+    --add-module=`pwd`/modules/lua-nginx-module-0.10.20 \
+    --add-module=`pwd`/modules/nginx-upsync-module \
+    --add-module=`pwd`/modules/ngx_http_upstream_check_module \
+    --add-module=`pwd`/modules/ngx_http_upstream_session_sticky_module \
+    --add-module=`pwd`/modules/ngx_http_upstream_dyups_module \
+    --with-pcre-jit \
+    --with-openssl-opt='-O3 -fPIC'
